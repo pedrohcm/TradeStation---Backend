@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nome": "Pedro Henrique",
+        "usuario": "pedrohcm5",
+        "email": "pedro.maia@ccc.ufcg.edu.br",
+        "saldo": 300.00,
+        "compras": 15,
+        "reputacao": "Excelente",
+        "anuncios": [2]
+    },
+    {
+        "id": 2,
+        "nome": "Wesley Santos",
+        "usuario": "wesleySan7os",
+        "email": "wesley.santos.silva@ccc.ufcg.edu.br",
+        "saldo": 5000.00,
+        "compras": 8,
+        "reputacao": "Ótimo comprador",
+        "anuncios": [1]
+    },
+    {
+        "id": 3,
+        "nome": "Victor Emanuel",
+        "usuario": "victorfs",
+        "email": "victor.farias@ccc.ufcg.edu.br",
+        "saldo": 3.00,
+        "compras": 1,
+        "reputacao": "Excelente",
+        "anuncios": []
+    }
+]

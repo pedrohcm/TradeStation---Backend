@@ -1,17 +1,22 @@
 {
-  "name": "pdw",
+  "name": "pdw-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend do projeto da disciplina Principios de Desenvolvimento Web da UFCG",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Pedro Maia",
+  "bugs": {
+    "url": "https://github.com/pedrohcm/pdw-backend/issues"
+  },
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
-    "supertest": "^3.1.0"
+    "supertest": "^3.2.0"
   }
 }
