@@ -9,9 +9,9 @@ app.get('/', function (req, res) {
     }))
 });
 
-const anuncioRoute = require('./routes/anuncio.route.js');
-const perguntaRoute = require('./routes/pergunta.route.js');
-const usuarioRoute = require('./routes/usuario.route.js');
+const anuncioRoute = require('./anuncios/anuncio.route.js');
+const perguntaRoute = require('./perguntas/pergunta.route.js');
+const usuarioRoute = require('./usuarios/usuario.route.js');
 
 app.use('/anuncio', anuncioRoute);
 app.use('/pergunta', perguntaRoute);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = new express.Router();
-const perguntas = require('../data/perguntas.json');
+const perguntas = require('./perguntas.json');
 
 router.use((req, res, next) => {
     next();

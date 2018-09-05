@@ -1,6 +1,6 @@
 const express = require('express');
 const router = new express.Router();
-const anuncios = require('../data/anuncios.json');
+const anuncios = require('./anuncios.json');
 
 router.use((req, res, next) => {
     next();
