@@ -29,28 +29,28 @@ router.post('/', (req, res) => {
         'descricao': req.body.descricao,
     };
     anuncios.push(product);
-    return res.status(200).json(`Anúncio "${product.name}" criado!`);
+    return res.status(200).json(`Anúncio "${anuncio.nome}" criado!`);
 });
 
 router.put('/:id', (req, res) => {
-    const anuncio = encontraAnuncio(products, req.params.id);
+    const anuncio = encontraAnuncio(anuncios, req.params.id);
     if (!anuncio) {
         return res.status(404).json(`Anúncio com o id ${req.params.id} não existe.`);
     }
     anuncio.nome = req.body.nome;
     anuncio.valor = req.body.valor;
     anuncio.descricao = req.body.descricao;
-    return res.status(200).json(`Anúncio "${product.name}" atualizado!`);
+    return res.status(200).json(`Anúncio "${anuncio.nome}" atualizado!`);
 });
 
 router.delete('/:id', (req, res) => {
-    const anuncio = encontraAnuncio(products, req.params.id);
+    const anuncio = encontraAnuncio(anuncios, req.params.id);
     if (!anuncio) {
         return res.status(404).json(`Anúncio com o id ${req.params.id} não existe.`);
     }
     const indiceAnuncio = anuncios.indexOf(anuncio);
     anuncios.splice(indiceAnuncio, 1);
-    return res.status(200).json(`Anúncio "${product.name}" deletado!`);
+    return res.status(200).json(`Anúncio "${anuncio.nome}" deletado!`);
 });
 
 
