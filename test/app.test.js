@@ -1,5 +1,8 @@
-const app = require('../src/index');
+/* eslint-disable */
+
+const app = require('../src/app');
 const request = require('supertest');
+const mocha = require('mocha');
 
 request(app)
   .get('/usuario')
