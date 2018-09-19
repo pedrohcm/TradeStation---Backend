@@ -5,6 +5,13 @@ const morgan = require('morgan');
 var mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(function (req, res, next) {
+    res.header('Content-Type', 'application/json');
+    next();
+});
+
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -23,12 +30,7 @@ app.use('/pergunta', perguntaRoute);
 app.use('/usuario', usuarioRoute);
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(function (req, res, next) {
-    res.header('Content-Type', 'application/json');
-    next();
-});
+
 app.listen(PORT, () => console.log('PDW backend listening on port 3000!'))
 
 module.exports = app;
