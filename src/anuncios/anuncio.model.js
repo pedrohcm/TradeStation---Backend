@@ -9,7 +9,7 @@ var anuncioSchema = new mongoose.Schema({
 	valor: {
 		type: Number,
 		min: [0, 'E vai vender de graça?'],
-		required: [true, "O valor do anúncio deverá ser ."],
+		required: [true, "O valor do anúncio não pode ser vazio."],
 		index: true
 	},
 	estado: {
@@ -23,5 +23,5 @@ var anuncioSchema = new mongoose.Schema({
 	perguntas: [Number],
 });
 
-var Anuncio = mongoose.model('Usuario', anuncioSchema);
+var Anuncio = mongoose.model('Anuncio', anuncioSchema);
 module.exports = Anuncio;

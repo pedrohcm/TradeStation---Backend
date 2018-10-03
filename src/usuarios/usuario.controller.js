@@ -10,6 +10,16 @@ exports.retornaUsuarios = (req, res, next) => {
     })
 };
 
+exports.retornaUsuario = (req, res) => {
+  Usuario.findById(req.params.id)
+    .then((result) => {
+        res.status(200).json(result);
+    })
+    .catch((error) => {
+        res.status(400).send(error);
+    })
+};
+
 exports.adicionaUsuario = (req, res, next) => {
   var novoUsuario = new Usuario(req.body);
   novoUsuario.save({})
@@ -22,20 +32,24 @@ exports.adicionaUsuario = (req, res, next) => {
 };
 
 exports.atualizaUsuario = (req, res) => {
-  var id = req.params.id;
-  Usuario.findById(id)
-    .then(result => {
-      console.log(result)
-      Usuario.save(req.body)
-        .then(result => {
-          res.status(200).json(result);
-        })
-        .catch(error => {
-          res.status(400).send(error);
-        })
-      res.status(200).json(result);
+  const userId = req.params.id;
+  Usuario.findByIdAndUpdate(userId, req.body)
+    .then((result) => {
+      console.log("Entrei no result")
+        res.status(200).json(result);
     })
-    .catch(error => {
-      res.status(400).send(error);
+    .catch((error) => {
+      console.log("Entrei no error")
+        res.status(400).send(error);
+    })
+};
+
+exports.deletaUsuario = (req, res) => {
+  Usuario.deleteOne(req.params.id)
+    .then((result) => {
+        res.status(200).json(result);
+    })
+    .catch((error) => {
+        res.status(400).send(error);
     })
 };

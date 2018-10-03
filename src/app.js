@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost/test');
 
 app.get('/', function (req, res) {
     res.send(JSON.stringify({
-        mensagem: "Bem-vindo ao Mercado Livre-se!"
+        mensagem: "Bem-vindo ao TradeStation!"
     }))
 });
 
@@ -29,8 +29,6 @@ app.use('/anuncio', anuncioRoute);
 app.use('/pergunta', perguntaRoute);
 app.use('/usuario', usuarioRoute);
 
-
-
-app.listen(PORT, () => console.log('PDW backend listening on port 3000!'))
+app.listen(PORT, () => console.log('TradeStation listening on port 3000!'))
 
 module.exports = app;

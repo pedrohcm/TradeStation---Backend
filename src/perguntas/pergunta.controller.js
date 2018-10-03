@@ -1,19 +1,56 @@
 var Pergunta = require('./pergunta.model');
 
 exports.retornaPerguntas = (req, res, next) => {
-    let perguntasArray = perguntas;
-    res.json(perguntasArray);
+    Pergunta.find({})
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(error => {
+        res.status(400).send(error);
+      })
+};
+
+exports.retornaPergunta = (req, res) => {
+    const perguntaId = req.params.id;
+    Pergunta.findById(perguntaId)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
 };
 
 
 exports.adicionaPergunta = (req, res, next) => {
-    var novoUsuario = new Usuario(req.body);
-    novoUsuario.save({})
+    var novaPergunta = new Usuario(req.body);
+    novaPergunta.save({})
         .then(result => {
             res.status(200).json(result);
         })
         .catch(error => {
             res.status(400).send(error);
         })
+};
 
+exports.atualizaPergunta = (req, res) => {
+    const perguntaId = req.params.id;
+    Pergunta.findByIdAndUpdate(perguntaId, req.body)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
+};
+
+exports.deletaPergunta = (req, res) => {
+    const perguntaId = req.params.id;
+    Pergunta.deleteOne(perguntaId)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
 };

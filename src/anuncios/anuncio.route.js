@@ -8,7 +8,7 @@ router.use((req, res, next) => {
 
 router.get('/', controller.retornaAnuncios);
 router.get('/:id', controller.retornaAnuncio);
-router.post('/login', controller.adicionaAnuncio);
+router.post('/', controller.adicionaAnuncio);
 router.put('/:id', controller.atualizaAnuncio);
 router.delete('/:id', controller.removeAnuncio);
 

@@ -1,52 +1,56 @@
+var Anuncio = require('./anuncio.model');
+
 exports.retornaAnuncios = (req, res, next) => {
-  let anunciosArray = anuncios;
-  res.json(anunciosArray);
+    Anuncio.find({})
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(error => {
+        res.status(400).send(error);
+      })
 };
 
-exports.retornaAnuncio = (req, res, next) => {
-  const anuncio = encontraAnuncio(anuncios, req.params.id);
-  if (anuncio) {
-    res.status(200).json(anuncio);
-  } else {
-    res.status(404).json(`Anúncio com o id ${req.params.id} não encontrado.`);
-  }
+exports.retornaAnuncio = (req, res) => {
+    const anuncioId = req.params.id;
+    Anuncio.findById(anuncioId)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
 };
+
 
 exports.adicionaAnuncio = (req, res, next) => {
-  const anuncio = {
-    'id': anuncios.length + 1,
-    'nome': req.body.nome,
-    'valor': req.body.valor,
-    'estado': req.body.estado,
-    'descricao': req.body.descricao,
-  };
-  anuncios.push(product);
-  return res.status(200).json(`Anúncio "${anuncio.nome}" criado!`);
+    var novoAnuncio = new Anuncio(req.body);
+    novoAnuncio.save({})
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            res.status(400).send(error);
+        })
 };
 
-exports.atualizaAnuncio = (req, res, next) => {
-  const anuncio = encontraAnuncio(anuncios, req.params.id);
-  if (!anuncio) {
-    return res.status(404).json(`Anúncio com o id ${req.params.id} não existe.`);
-  }
-  anuncio.nome = req.body.nome;
-  anuncio.valor = req.body.valor;
-  anuncio.descricao = req.body.descricao;
-  return res.status(200).json(`Anúncio "${anuncio.nome}" atualizado!`);
+exports.atualizaAnuncio = (req, res) => {
+    const anuncioId = req.params.id;
+    Anuncio.findByIdAndUpdate(AnuncioId, req.body)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
 };
 
-exports.removeAnuncio = (req, res, next) => {
-  const anuncio = encontraAnuncio(anuncios, req.params.id);
-  if (!anuncio) {
-    return res.status(404).json(`Anúncio com o id ${req.params.id} não existe.`);
-  }
-  const indiceAnuncio = anuncios.indexOf(anuncio);
-  anuncios.splice(indiceAnuncio, 1);
-  return res.status(200).json(`Anúncio "${anuncio.nome}" deletado!`);
+exports.deletaAnuncio = (req, res) => {
+    const anuncioId = req.params.id;
+    Anuncio.deleteOne(AnuncioId)
+      .then((result) => {
+          res.status(200).json(result);
+      })
+      .catch((error) => {
+          res.status(400).send(error);
+      })
 };
-
-
-function encontraAnuncio(anuncios, idAnuncio) {
-  const anuncio = anuncios.find((item) => item.id === parseInt(idAnuncio));
-  return anuncio;
-}

@@ -6,6 +6,9 @@ router.use((req, res, next) => {
 });
 
 router.get('/', controller.retornaPerguntas);
-router.post('/login', controller.adicionaPergunta);
+router.get('/:id', controller.retornaPergunta);
+router.post('/', controller.adicionaPergunta);
+router.put('/:id', controller.atualizaPergunta);
+router.delete('/:id', controller.deletaPergunta);
 
 module.exports = router;

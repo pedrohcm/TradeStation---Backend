@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var perguntaSchema = new mongoose.Schema({
   titulo: {
     type: String,
-    required: [true, "Título não pode ser vazia"]
+    required: [true, "Título não pode ser vazio"]
   },
   resposta: {
     type: String,
@@ -13,5 +13,4 @@ var perguntaSchema = new mongoose.Schema({
 });
 
 var Pergunta = mongoose.model('Pergunta', perguntaSchema);
-
 module.exports = Pergunta;

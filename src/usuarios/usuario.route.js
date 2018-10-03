@@ -7,7 +7,9 @@ router.use((req, res, next) => {
 });
 
 router.get('/', controller.retornaUsuarios);
+router.get('/:id', controller.retornaUsuarios);
 router.post('/', controller.adicionaUsuario);
 router.put('/:id', controller.atualizaUsuario);
+router.delete('/:id', controller.deletaUsuario);
 
 module.exports = router;
