@@ -24,10 +24,14 @@ app.get('/', function (req, res) {
 const anuncioRoute = require('./anuncios/anuncio.route');
 const perguntaRoute = require('./perguntas/pergunta.route');
 const usuarioRoute = require('./usuarios/usuario.route');
+const adminRoute = require('./admin/admin.route.js');
+const swaggerRoute = require('./docs/docs.route.js');
 
 app.use('/anuncio', anuncioRoute);
 app.use('/pergunta', perguntaRoute);
 app.use('/usuario', usuarioRoute);
+app.use('/admin', adminRoute);
+app.use('/docs', swaggerRoute);
 
 app.listen(PORT, () => console.log('TradeStation listening on port 3000!'))
 

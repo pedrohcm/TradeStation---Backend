@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var usuarioSchema = new mongoose.Schema({
+var adminSchema = new mongoose.Schema({
 	id: {
 		type: Number
 	},
@@ -28,9 +28,8 @@ var usuarioSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "Senha não pode ser vazia"]
 	},
-	reputacao: { type: String, default: "Sem reputação ainda." },
 });
 
-var Usuario = mongoose.model('Usuario', usuarioSchema);
+var Admin = mongoose.model('Admin', adminSchema);
 
-module.exports = Usuario;
+module.exports = Admin;

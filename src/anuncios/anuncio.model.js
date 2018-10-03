@@ -19,8 +19,7 @@ var anuncioSchema = new mongoose.Schema({
 	descricao: {
 		type: String,
 		required: [true, "Descrição do produto não pode ser vazia"]
-	},
-	perguntas: [Number],
+	}
 });
 
 var Anuncio = mongoose.model('Anuncio', anuncioSchema);

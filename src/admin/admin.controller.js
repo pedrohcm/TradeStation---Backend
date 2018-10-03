@@ -1,7 +1,7 @@
-var Usuario = require('./usuario.model');
+var Admin = require('./admin.model');
 
-exports.retornaUsuarios = (req, res, next) => {
-  Usuario.find({})
+exports.retornaAdmins = (req, res, next) => {
+  Admin.find({})
     .then(result => {
       res.status(200).json(result);
     })
@@ -10,9 +10,9 @@ exports.retornaUsuarios = (req, res, next) => {
     })
 };
 
-exports.retornaUsuario = (req, res) => {
-  const usuarioId = req.params.id;
-  Usuario.findById(usuarioId)
+exports.retornaAdmin = (req, res) => {
+  const adminId = req.params.id;
+  Admin.findById(adminId)
     .then((result) => {
       res.status(200).json(result);
     })
@@ -21,9 +21,9 @@ exports.retornaUsuario = (req, res) => {
     })
 };
 
-exports.adicionaUsuario = (req, res, next) => {
-  var novoUsuario = new Usuario(req.body);
-  novoUsuario.save({})
+exports.adicionaAdmin = (req, res, next) => {
+  var novoAdmin = new Admin(req.body);
+  novoAdmin.save({})
     .then(result => {
       res.status(200).json(result);
     })
@@ -32,9 +32,9 @@ exports.adicionaUsuario = (req, res, next) => {
     })
 };
 
-exports.atualizaUsuario = (req, res) => {
-  const usuarioId = req.params.id;
-  Usuario.findByIdAndUpdate(usuarioId, req.body)
+exports.atualizaAdmin = (req, res) => {
+  const adminId = req.params.id;
+  Admin.findByIdAndUpdate(adminId, req.body)
     .then((result) => {
       res.status(200).json(result);
     })
@@ -43,9 +43,9 @@ exports.atualizaUsuario = (req, res) => {
     })
 };
 
-exports.deletaUsuario = (req, res) => {
-  const usuarioId = req.params.id;
-  Usuario.findByIdAndDelete(usuarioId)
+exports.deletaAdmin = (req, res) => {
+  const adminId = req.params.id;
+  Admin.findByIdAndDelete(adminId)
     .then((result) => {
       res.status(200).json(result);
     })

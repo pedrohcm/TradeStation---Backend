@@ -10,7 +10,7 @@ router.get('/', controller.retornaAnuncios);
 router.get('/:id', controller.retornaAnuncio);
 router.post('/', controller.adicionaAnuncio);
 router.put('/:id', controller.atualizaAnuncio);
-router.delete('/:id', controller.removeAnuncio);
+router.delete('/:id', controller.deletaAnuncio);
 
 module.exports = router;
 
