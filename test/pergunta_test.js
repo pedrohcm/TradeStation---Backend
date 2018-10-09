@@ -17,6 +17,10 @@ describe('Pergunta', function(){
     });
 });
 
+/**
+ * 
+ 
+
 describe('/GET Pergunta', function() {
     it('Deve retornar todas as perguntas cadastradas no sistema', function(done) {
         chai.request(app)
@@ -28,3 +32,5 @@ describe('/GET Pergunta', function() {
         });
     });
 });
+
+*/

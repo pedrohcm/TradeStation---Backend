@@ -17,7 +17,8 @@ describe('Anuncio', function(){
     });
 });
 
-describe('/GET Anuncio', function() {
+/**
+ describe('/GET Anuncio', function() {
     it('Deve retornar todos os usuários cadastrados no sistema', function(done) {
         chai.request(app)
         .get('/anuncio')
@@ -28,3 +29,4 @@ describe('/GET Anuncio', function() {
         });
     });
 });
+ */
