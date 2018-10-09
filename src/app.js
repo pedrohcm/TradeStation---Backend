@@ -36,14 +36,12 @@ app.get('/', function (req, res) {
 const anuncioRoute = require('./anuncios/anuncio.route');
 const perguntaRoute = require('./perguntas/pergunta.route');
 const usuarioRoute = require('./usuarios/usuario.route');
-const adminRoute = require('./admin/admin.route.js');
 const docsRoute = require('./docs/docs.route.js');
 const autenticacaoRoute = require('./autenticacao/autenticacao.route.js');
 
 app.use('/anuncio', anuncioRoute);
 app.use('/pergunta', perguntaRoute);
 app.use('/usuario', usuarioRoute);
-app.use('/admin', adminRoute);
 app.use('/docs', docsRoute);
 app.use('/auth', autenticacaoRoute);
 

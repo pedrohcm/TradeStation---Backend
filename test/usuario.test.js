@@ -42,7 +42,7 @@ describe('Usuarios', function () {
                 .post('/usuario')
                 .send(usuario)
                 .end(function (error, res) {
-                    res.should.have.status(400);
+                    res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('errors');
                     res.body.errors.should.have.property('nome');

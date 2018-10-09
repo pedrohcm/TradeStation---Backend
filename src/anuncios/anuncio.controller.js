@@ -1,56 +1,57 @@
 var Anuncio = require('./anuncio.model');
 
-exports.retornaAnuncios = (req, res, next) => {
-    Anuncio.find({})
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        })
+function retornaAnuncios(req, res) {
+    var query = Anuncio.find({});
+    query.exec(function (error, anuncios) {
+        if (error)
+            res.send(error);
+        res.json(anuncios);
+    });
 };
 
-exports.retornaAnuncio = (req, res) => {
-    const anuncioId = req.params.id;
-    Anuncio.findById(anuncioId)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+function retornaAnuncio(req, res) {
+    Anuncio.findById(req.params.id, function (error, anuncio) {
+        if (error)
+            res.send(error);
+        res.json(anuncio);
+    });
 };
 
-
-exports.adicionaAnuncio = (req, res, next) => {
+function adicionaAnuncio(req, res) {
     var novoAnuncio = new Anuncio(req.body);
-    novoAnuncio.save({})
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        })
+    novoAnuncio.save(function (error, anuncio) {
+        if (error) {
+            res.send(error);
+        } else {
+            res.json({ message: "Anuncio adicionado", anuncio });
+        }
+    });
 };
 
-exports.atualizaAnuncio = (req, res) => {
+function atualizaAnuncio(req, res) {
     const anuncioId = req.params.id;
-    Anuncio.findByIdAndUpdate(anuncioId, req.body)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+    Anuncio.findById({ _id: anuncioId }, function (error, anuncio) {
+        if (error)
+            res.send(error);
+        Object.assign(anuncio, req.body).save(function (error, anuncio) {
+            if (error)
+                res.send(error);
+            res.json({ message: "Anúncio atualizado.", anuncio });
+        });
+    });
 };
 
-exports.deletaAnuncio = (req, res) => {
+function deletaAnuncio(req, res) {
     const anuncioId = req.params.id;
-    Anuncio.findByIdAndDelete(anuncioId)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+    Anuncio.remove({ _id: anuncioId }, function (error, resultado) {
+        if (error)
+            res.send(error)
+        res.json({ message: "Anúncio deletado.", resultado });
+    });
+};
+
+module.exports = {
+    retornaAnuncio,
+    retornaAnuncios, adicionaAnuncio,
+    atualizaAnuncio, deletaAnuncio
 };

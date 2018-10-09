@@ -1,56 +1,57 @@
 var Pergunta = require('./pergunta.model');
 
-exports.retornaPerguntas = (req, res, next) => {
-    Pergunta.find({})
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        })
+function retornaPerguntas(req, res) {
+    var query = Pergunta.find({});
+    query.exec(function (error, perguntas) {
+        if (error)
+            res.send(error);
+        res.json(perguntas);
+    });
 };
 
-exports.retornaPergunta = (req, res) => {
-    const perguntaId = req.params.id;
-    Pergunta.findById(perguntaId)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+function retornaPergunta(req, res) {
+    Pergunta.findById(req.params.id, function (error, pergunta) {
+        if (error)
+            res.send(error);
+        res.json(pergunta);
+    });
 };
 
-
-exports.adicionaPergunta = (req, res, next) => {
+function adicionaPergunta(req, res) {
     var novaPergunta = new Pergunta(req.body);
-    novaPergunta.save({})
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        })
+    novaPergunta.save(function (error, pergunta) {
+        if (error) {
+            res.send(error);
+        } else {
+            res.json({ message: "Pergunta adicionada", pergunta });
+        }
+    });
 };
 
-exports.atualizaPergunta = (req, res) => {
+function atualizaPergunta(req, res) {
     const perguntaId = req.params.id;
-    Pergunta.findByIdAndUpdate(perguntaId, req.body)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+    Pergunta.findById({ _id: perguntaId }, function (error, pergunta) {
+        if (error)
+            res.send(error);
+        Object.assign(pergunta, req.body).save(function (error, pergunta) {
+            if (error)
+                res.send(error);
+            res.json({ message: "Pergunta atualizada.", pergunta });
+        });
+    });
 };
 
-exports.deletaPergunta = (req, res) => {
+function deletaPergunta(req, res) {
     const perguntaId = req.params.id;
-    Pergunta.findByIdAndDelete(perguntaId)
-        .then((result) => {
-            res.status(200).json(result);
-        })
-        .catch((error) => {
-            res.status(400).send(error);
-        })
+    Pergunta.remove({ _id: perguntaId }, function (error, resultado) {
+        if (error)
+            res.send(error)
+        res.json({ message: "Pergunta deletada.", resultado });
+    });
+};
+
+module.exports = {
+    retornaPergunta,
+    retornaPerguntas, adicionaPergunta,
+    atualizaPergunta, deletaPergunta
 };

@@ -6,11 +6,14 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', controller.retornaAnuncios);
-router.get('/:id', controller.retornaAnuncio);
-router.post('/', controller.adicionaAnuncio);
-router.put('/:id', controller.atualizaAnuncio);
-router.delete('/:id', controller.deletaAnuncio);
+router.route("/")
+.get(controller.retornaAnuncios)
+.post(controller.adicionaAnuncio);
+
+router.route("/:id")
+.get(controller.retornaAnuncio)
+.delete(controller.deletaAnuncio)
+.put(controller.atualizaAnuncio);
 
 module.exports = router;
 

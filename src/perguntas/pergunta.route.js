@@ -5,10 +5,13 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', controller.retornaPerguntas);
-router.get('/:id', controller.retornaPergunta);
-router.post('/', controller.adicionaPergunta);
-router.put('/:id', controller.atualizaPergunta);
-router.delete('/:id', controller.deletaPergunta);
+router.route("/")
+.get(controller.retornaPerguntas)
+.post(controller.adicionaPergunta);
+
+router.route("/:id")
+.get(controller.retornaPergunta)
+.delete(controller.deletaPergunta)
+.put(controller.atualizaPergunta);
 
 module.exports = router;

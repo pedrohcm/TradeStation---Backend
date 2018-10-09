@@ -1,59 +1,64 @@
 var Usuario = require('./usuario.model');
 
-exports.retornaUsuarios = (req, res, next) => {
-  Usuario.find({})
-    .then(result => {
-      res.status(200).json(result);
-    })
-    .catch(error => {
-      res.status(400).send(error);
-    })
+
+function retornaUsuarios(req, res) {
+  var query = Usuario.find({});
+  query.exec(function (error, usuarios) {
+    if (error)
+      res.send(error);
+    res.json(usuarios);
+  });
 };
 
-exports.retornaUsuario = (req, res) => {
-  const usuarioId = req.params.id;
-  Usuario.findById(usuarioId)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+function retornaUsuario(req, res) {
+  Usuario.findById(req.params.id, function (error, usuario) {
+    if (error)
+      res.send(error);
+    res.json(usuario);
+  });
 };
 
-exports.adicionaUsuario = (req, res, next) => {
+function adicionaUsuario(req, res) {
   var novoUsuario = new Usuario(req.body);
-  novoUsuario.save({})
-    .then(result => {
-      res.status(200).json(result);
-    })
-    .catch(error => {
-      res.status(400).send(error);
-    })
+  novoUsuario.save(function (error, usuario) {
+    if (error) {
+      res.send(error);
+    } else {
+      res.json({ message: "usuario adicionado", usuario });
+    }
+  });
 };
 
-exports.atualizaUsuario = (req, res) => {
+function atualizaUsuario(req, res) {
   const usuarioId = req.params.id;
-  Usuario.findByIdAndUpdate(usuarioId, req.body)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  Usuario.findById({ _id: usuarioId }, function (error, usuario) {
+    if (error)
+      res.send(error);
+    Object.assign(usuario, req.body).save(function (error, usuario) {
+      if (error)
+        res.send(error);
+      res.json({ message: "Usuário atualizado.", usuario });
+    });
+  });
 };
 
-exports.deletaUsuario = (req, res) => {
+function deletaUsuario(req, res) {
   const usuarioId = req.params.id;
-  Usuario.findByIdAndDelete(usuarioId)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  Usuario.remove({ _id: usuarioId }, function (error, resultado) {
+    if(error)
+      res.send(error)
+    res.json({ message: "Usuário deletado.", resultado});
+  });
 };
 
+module.exports = {retornaUsuario, 
+  retornaUsuarios, adicionaUsuario, 
+  atualizaUsuario, deletaUsuario};
+
+/**
+ * 
+ 
 exports.retornaUsuarioPorEmail(emailUsuario) = {
   return: Usuario.findOne({ 'email': emailUsuario })
 };
+*/

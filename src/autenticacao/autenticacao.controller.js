@@ -2,6 +2,10 @@ const jsonWebToken = require('jsonwebtoken');
 const usuarioController = require('../usuarios/usuario.controller');
 const config = require('../../config/autenticacao');
 
+
+/**
+ * 
+ 
 exports.login = (req, res, next) => {
   const emailUsuario = req.body.email;
   const senhaUsuario = req.body.senha;
@@ -74,3 +78,4 @@ const decodeToken = (token) => {
 }
 
 module.exports = { login, authenticate, authById };
+*/
