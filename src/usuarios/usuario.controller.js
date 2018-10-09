@@ -53,3 +53,7 @@ exports.deletaUsuario = (req, res) => {
       res.status(400).send(error);
     })
 };
+
+exports.retornaUsuarioPorEmail(emailUsuario) = {
+  return: Usuario.findOne({ 'email': emailUsuario })
+};

@@ -15,13 +15,13 @@ app.use(function (req, res, next) {
 
 let corsOptions = {};
 if (PORT === 'production') {
- corsOptions = {
-   'origin': 'http://localhost:3000',
-   'optionsSuccessStatus': 200
- };
- console.log('The system is running in production');
+    corsOptions = {
+        'origin': 'http://localhost:3000',
+        'optionsSuccessStatus': 200
+    };
+    console.log('The system is running in production');
 } else {
- console.log('The system is not running in production');
+    console.log('The system is not running in production');
 }
 app.use(cors(corsOptions));
 
@@ -38,12 +38,14 @@ const perguntaRoute = require('./perguntas/pergunta.route');
 const usuarioRoute = require('./usuarios/usuario.route');
 const adminRoute = require('./admin/admin.route.js');
 const docsRoute = require('./docs/docs.route.js');
+const autenticacaoRoute = require('./autenticacao/autenticacao.route.js');
 
 app.use('/anuncio', anuncioRoute);
 app.use('/pergunta', perguntaRoute);
 app.use('/usuario', usuarioRoute);
 app.use('/admin', adminRoute);
 app.use('/docs', docsRoute);
+app.use('/auth', autenticacaoRoute);
 
 app.listen(PORT, () => console.log('TradeStation listening on port 3000!'))
 

@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'test';
 
 var mongoose = require('mongoose');
 var Usuario = require('../src/usuarios/usuario.model');
-var logger = require('mocha-logger');
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
@@ -76,8 +75,8 @@ describe('Usuarios', function () {
         });
     });
 
-    describe('/GET/:id Usuario', function () {
-        it('Deve retornar um usuário dado o id', function () {
+    describe('/GET/:id user', function () {
+        it('Deve retornar um usuário dado o/GET/:id Usuario', function (done) {
             var usuario = new Usuario({
                 nome: "doctorWoof",
                 email: "timeandrelative@dimensions.in.space",
@@ -110,17 +109,17 @@ describe('Usuarios', function () {
                 email: "timeandrelative@dimensions.in.space"
             })
             usuario.save(function (error, usuario) {
-                chai.request(server)
+                chai.request(app)
                     .delete('/usuario/' + usuario.id)
                     .end(function (error, res) {
                         res.should.have.status(200);
                         chai.request(app)
-                        .get('/usuario')
-                        .end(function (error, res) {
-                            res.should.have.status(200);
-                            res.body.should.be.a('array');
-                            res.body.length.should.be.eql(0);
-                        });
+                            .get('/usuario')
+                            .end(function (error, res) {
+                                res.should.have.status(200);
+                                res.body.should.be.a('array');
+                                res.body.length.should.be.eql(0);
+                            });
                         done();
                     });
             });
