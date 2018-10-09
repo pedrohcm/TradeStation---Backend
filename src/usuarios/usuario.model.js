@@ -7,28 +7,44 @@ var usuarioSchema = new mongoose.Schema({
 	},
 	nome: {
 		type: String,
-		required: [true, "Nome não pode ser vazio."]
+		required: true
 	},
 	usuario: {
 		type: String,
 		lowercase: true,
 		unique: true,
-		required: [true, "Nome de usuário não pode ser vazio."],
-		match: [/^[a-zA-Z0-9]+$/, 'Nome de usuário inválido.'],
+		required: true,
+		match: /^[a-zA-Z0-9]+$/,
 		index: true
 	},
 	email: {
 		type: String,
 		lowercase: true,
 		unique: true,
-		required: [true, "E-mail não pode ser vazio."],
-		match: [/\S+@\S+\.\S+/, 'E-mail inválido.'],
+		required: true,
+		match: /\S+@\S+\.\S+/,
 	},
 	senha: {
 		type: String,
-		required: [true, "Senha não pode ser vazia"]
+		required: true
 	},
-	reputacao: { type: String, default: "Sem reputação ainda." },
+	reputacao: { 
+		type: String, 
+		enum: ['SEM REPUTAÇÃO', 'BOA', "ÓTIMA", "RUIM", "PÉSSIMA"],
+		default: "SEM REPUTAÇÃO" 
+	},
+	criadoEm: {
+		type: Date,
+		default: Date.now
+	}
+});
+
+usuarioSchema.pre('save', next => {
+    var dataAtual = new Date();
+    if(!this.criadoEm) {
+        this.criadoEm = dataAtual;
+    }
+    next();
 });
 
 var Usuario = mongoose.model('Usuario', usuarioSchema);

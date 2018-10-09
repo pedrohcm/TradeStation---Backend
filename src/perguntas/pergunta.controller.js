@@ -23,7 +23,7 @@ exports.retornaPergunta = (req, res) => {
 
 
 exports.adicionaPergunta = (req, res, next) => {
-    var novaPergunta = new Usuario(req.body);
+    var novaPergunta = new Pergunta(req.body);
     novaPergunta.save({})
         .then(result => {
             res.status(200).json(result);
