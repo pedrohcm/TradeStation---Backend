@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('./usuario.controller');
+const autenticacao = require('../autenticacao/autenticacao.controller');
 
 router.route("/")
     .get(controller.retornaUsuarios)

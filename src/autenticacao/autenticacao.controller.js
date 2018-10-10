@@ -2,10 +2,6 @@ const jsonWebToken = require('jsonwebtoken');
 const usuarioController = require('../usuarios/usuario.controller');
 const config = require('../../config/autenticacao');
 
-
-/**
- * 
- 
 exports.login = (req, res, next) => {
   const emailUsuario = req.body.email;
   const senhaUsuario = req.body.senha;
@@ -18,9 +14,8 @@ exports.login = (req, res, next) => {
           const token = jsonWebToken.sign({
             _id: usuario.id,
             email: usuario.email,
-            //role: ADMIN
-          }, config.jsonWebTokenSecret);
-          return res.json({ usuarioId: usuario._id, token });
+          }, config.jwtSecret);
+          return res.json({ usuarioId: usuario.id, token });
         } else {
           return res.json({ 'message': 'Senha incorreta.' });
         }
@@ -48,34 +43,30 @@ exports.autenticar = (req, res, next) => {
         req.email = data.email;
         next();
       } else {
-        return res.json({ 'message': 'Failed to decode. Wrong token.' });
+        return res.json({ 'message': 'Falha na decodificação. Token errado.' });
       }
     } catch (error) {
-      console.log(error);
-      return res.json({ 'message': 'Something went wrong, try again.', 'error': error.message });
+      return res.json({ 'message': 'Algo deu errado.', 'error': error.message });
     }
   } else {
-    return res.json({ 'message': 'Failed to authenticate. Unreachable token.' });
+    return res.json({ 'message': 'Falha na autenticação. Token inacessível.' });
   }
 }
 
-const authById = (req, res, next) => {
-  const usuarioId = req._id;
+const autenticarPorId = (req, res, next) => {
+  const usuarioId = req.id;
   if (usuarioId) {
-    const reqId = req.params.idusuario;
+    const reqId = req.params.usuarioId;
     if (usuarioId === reqId) {
       next();
     } else {
-      return res.json({ 'message': 'Failed. Unauthorized usuario.' });
+      return res.json({ 'message': 'Erro: Usuário não autorizado.' });
     }
   } else {
-    return res.json({ 'message': 'Something went wrong, try again.' });
+    return res.json({ 'message': 'Algo deu errado.' });
   }
 }
 
 const decodeToken = (token) => {
-  return jsonWebToken.verify(token, config.jsonWebTokenSecret);
+  return jsonWebToken.verify(token, config.jwtSecret);
 }
-
-module.exports = { login, authenticate, authById };
-*/

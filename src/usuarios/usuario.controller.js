@@ -51,9 +51,13 @@ function deletaUsuario(req, res) {
   });
 };
 
+function retornaUsuarioPorEmail(emailUsuario) {
+  return Usuario.findOne({'email': emailUsuario});
+}
+
 module.exports = {retornaUsuario, 
   retornaUsuarios, adicionaUsuario, 
-  atualizaUsuario, deletaUsuario};
+  atualizaUsuario, deletaUsuario, retornaUsuarioPorEmail};
 
 /**
  * 
