@@ -31,11 +31,22 @@ var anuncioSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	usuario_id: {
+	imagem: {
+		type: String,
+		required: true
+	},
+	usuario: {
+		type: String,
+		required: true
+	},
+	/**
+	 usuario_id: {
 		type: mongoose.SchemaTypes.ObjectId,
 		ref: 'Usuario',
 		required: true
 	},
+	 */
+	
 	criadoEm: {
 		type: Date,
 		default: Date.now
