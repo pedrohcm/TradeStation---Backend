@@ -25,11 +25,6 @@ var usuarioSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	reputacao: { 
-		type: String, 
-		enum: ['SEM REPUTAÇÃO', 'BOA', "ÓTIMA", "RUIM", "PÉSSIMA"],
-		default: "SEM REPUTAÇÃO" 
-	},
 	criadoEm: {
 		type: Date,
 		default: Date.now
@@ -37,11 +32,11 @@ var usuarioSchema = new mongoose.Schema({
 });
 
 usuarioSchema.pre('save', next => {
-    var dataAtual = new Date();
-    if(!this.criadoEm) {
-        this.criadoEm = dataAtual;
-    }
-    next();
+	var dataAtual = new Date();
+	if (!this.criadoEm) {
+		this.criadoEm = dataAtual;
+	}
+	next();
 });
 
 var Usuario = mongoose.model('Usuario', usuarioSchema);

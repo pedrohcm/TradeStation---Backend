@@ -4,12 +4,12 @@ const controller = require('./usuario.controller');
 const autenticacao = require('../autenticacao/autenticacao.controller');
 
 router.route("/")
-    .get(controller.retornaUsuarios)
+    .get(autenticacao.autenticar,controller.retornaUsuarios)
     .post(controller.adicionaUsuario);
 
 router.route("/:id")
     .get(controller.retornaUsuario)
     .delete(controller.deletaUsuario)
-    .put(controller.atualizaUsuario);
+    .put(autenticacao.autenticar, controller.atualizaUsuario);
 
 module.exports = router;
