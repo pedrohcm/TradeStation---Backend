@@ -21,9 +21,9 @@ function adicionaAnuncio(req, res) {
     var novoAnuncio = new Anuncio(req.body);
     novoAnuncio.save(function (error, anuncio) {
         if (error) {
-            res.send(error);
+            res.status(400).json(error);
         } else {
-            res.json({ message: "Anuncio adicionado", anuncio });
+            res.status(201).json({ message: "Anuncio adicionado", anuncio });
         }
     });
 };

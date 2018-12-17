@@ -20,7 +20,7 @@ var anuncioSchema = new mongoose.Schema({
 	estado: {
 		type: String,
 		required: true,
-		enum: ['USADO', 'NOVO', 'SEMI-NOVO']
+		enum: ['USADO', 'NOVO', 'SEMINOVO']
 	},
 	interesse: {
 		type: String,
