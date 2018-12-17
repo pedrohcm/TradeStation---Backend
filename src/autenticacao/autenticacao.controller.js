@@ -8,23 +8,21 @@ exports.login = (req, res, next) => {
   usuarioController.retornaUsuarioPorEmail(emailUsuario)
     .then((usuario) => {
       if (!usuario) {
-        return res.json({ 'message': 'Senha incorreta.' });
+        return res.status(400).json('Usuário não cadastrado no sistema.');
       } else if (usuario) {
         if (senhaUsuario === usuario.senha) {
           const token = jsonWebToken.sign({
             _id: usuario.id,
             email: usuario.email,
           }, config.jwtSecret);
-          return res.json({ usuarioId: usuario.id, token });
+          return res.status(201).json({ usuarioId: usuario.id, token: token });
         } else {
-          return res.json({ 'message': 'Senha incorreta.' });
+          return res.status(400).json('Usuario nao criado.');
         }
       }
     })
     .catch((err) => {
-      console.log(err);
-      const error = { 'message': 'Algo deu errado.', 'error': err.message };
-      return res.json(error);
+      return res.status(400).json('Erro no login.');
     });
 };
 

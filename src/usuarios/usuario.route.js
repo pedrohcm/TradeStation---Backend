@@ -4,7 +4,7 @@ const controller = require('./usuario.controller');
 const autenticacao = require('../autenticacao/autenticacao.controller');
 
 router.route("/")
-    .get(autenticacao.autenticar,controller.retornaUsuarios)
+    .get(controller.retornaUsuarios)
     .post(controller.adicionaUsuario);
 
 router.route("/:id")

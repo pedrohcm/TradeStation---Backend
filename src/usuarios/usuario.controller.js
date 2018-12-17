@@ -22,9 +22,9 @@ function adicionaUsuario(req, res) {
   var novoUsuario = new Usuario(req.body);
   novoUsuario.save(function (error, usuario) {
     if (error) {
-      res.send(error);
+      res.status(400).json('Usuario nao criado.');
     } else {
-      res.json({ message: "usuario adicionado", usuario });
+      res.status(201).json('Usuario criado.');
     }
   });
 };
